@@ -1,2 +1,468 @@
-# ys-concierge
-ys-concierge
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YS Concierge | Youssef Shaaban</title>
+  <meta name="description" content="Concierge services for high-net-worth individuals: premium international flights, ground transportation, and luxury accommodation." />
+  <style>
+    :root{
+      --bg:#F4F9FF;
+      --panel:#FFFFFF;
+      --panel2:#F0F6FF;
+      --text:#0B2A4A;
+      --muted:#5B7FA6;
+      --line:rgba(11,42,74,.12);
+      --blue:#3AA0FF;
+      --blue2:#7CC4FF;
+      --shadow: 0 18px 40px rgba(58,160,255,.18);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(122,196,255,.35), transparent 55%),
+        radial-gradient(900px 600px at 85% 10%, rgba(58,160,255,.25), transparent 55%),
+        linear-gradient(180deg, var(--bg), #EAF3FF);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:18px;
+      position:sticky;top:0;backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(7,10,18,.55);
+      border-bottom:1px solid var(--line);
+      padding:16px 28px;
+      z-index:5;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .mark{
+      width:34px;height:34px;border-radius:12px;
+      background:linear-gradient(135deg, rgba(58,160,255,.95), rgba(124,196,255,.85));
+      position:relative;
+      box-shadow:0 12px 30px rgba(58,160,255,.22);
+      overflow:hidden;
+    }
+    .mark::after{
+      content:"";
+      position:absolute;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M6 35c13-10 27-13 52-14' fill='none' stroke='%230B2A4A' stroke-opacity='.25' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M36 18l7 7-10 3' fill='none' stroke='%230B2A4A' stroke-opacity='.25' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M34 26l10 6' fill='none' stroke='%230B2A4A' stroke-opacity='.25' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-size:70% 70%;
+      background-repeat:no-repeat;
+      background-position:center;
+    }
+    .brand-title{font-weight:800;letter-spacing:.3px;line-height:1.1}
+    .brand-sub{font-size:12px;color:var(--muted)}
+    .navlinks{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+    .navlinks a{opacity:.9;font-size:14px}
+    .navlinks a:hover{opacity:1}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 16px;border-radius:14px;
+      border:1px solid rgba(214,177,94,.35);
+      font-weight:750;letter-spacing:.2px;
+      transition:transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{
+      background:linear-gradient(135deg, var(--blue), var(--blue2));
+      color:#06325C;
+      border-color:rgba(58,160,255,.55);
+      box-shadow:0 14px 40px rgba(58,160,255,.28);
+    }
+    .btn.secondary{background:rgba(255,255,255,.04)}
+    .btn.small{padding:10px 12px;border-radius:12px;font-size:14px}
+
+    .hero{
+      display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:stretch;
+      padding:42px 0 12px;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-40px -20px auto -20px;
+      height:260px;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300'%3E%3Cpath d='M40 210 C 240 70, 420 70, 620 170 S 980 290, 1160 140' fill='none' stroke='%233AA0FF' stroke-opacity='.12' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M720 120 l18 18 -26 7' fill='none' stroke='%233AA0FF' stroke-opacity='.12' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M710 145 l26 15' fill='none' stroke='%233AA0FF' stroke-opacity='.12' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;
+      background-size:cover;
+      pointer-events:none;
+    }
+    .tag{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(214,177,94,.35);
+      background:rgba(214,177,94,.10);
+      color:var(--gold2);
+      font-size:13px;
+    }
+    h1{font-size:48px;line-height:1.03;margin:14px 0 12px;letter-spacing:-.6px}
+    .lead{color:var(--muted);line-height:1.65;font-size:16px;margin:0}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+
+    .card{
+      background:linear-gradient(180deg, #FFFFFF, #F3F8FF);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .card h3{margin:0 0 8px;font-size:18px}
+    .muted{color:var(--muted)}
+
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .kpi{padding:14px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+    .kpi strong{font-size:20px}
+
+    .section{margin-top:34px}
+    .section h2{margin:0 0 10px;font-size:28px;letter-spacing:-.2px}
+
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+
+    .service{padding:16px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+    .service .title{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+    .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg, var(--gold), var(--gold2))}
+
+    .list{margin:10px 0 0;padding:0;list-style:none}
+    .list li{padding:10px 0;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    .list li:first-child{border-top:0;padding-top:0}
+
+    .process{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .step{padding:14px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+    .step .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:12px;
+      background:rgba(214,177,94,.14);border:1px solid rgba(214,177,94,.32);color:var(--gold2);font-weight:800;margin-bottom:10px}
+
+    .testimonial{padding:16px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+    .quote{color:var(--muted);line-height:1.65;margin:0 0 10px}
+    .who{font-weight:800}
+
+    .contact{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px
+    }
+    label{display:block;font-size:13px;color:var(--muted);margin:0 0 6px}
+
+    .portrait{
+      width:112px;height:112px;
+      border-radius:22px;
+      object-fit:cover;
+      border:2px solid rgba(58,160,255,.35);
+      box-shadow:0 14px 36px rgba(58,160,255,.22);
+      filter:grayscale(1) contrast(1.05);
+      transition:filter .18s ease, transform .18s ease;
+      background:var(--panel2);
+    }
+    .portrait:hover{filter:grayscale(0) contrast(1.02);transform:translateY(-1px)}
+    input, textarea{
+      width:100%;padding:12px 12px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:#0A0F20;color:var(--text);
+      outline:none;
+    }
+    textarea{min-height:130px;resize:vertical}
+    .hint{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.4}
+
+    .footer{
+      margin-top:40px;padding:18px 0 40px;
+      color:var(--muted);
+      border-top:1px solid rgba(255,255,255,.08);
+      font-size:13px;
+      display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between;align-items:center
+    }
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr}
+      h1{font-size:40px}
+      .kpis{grid-template-columns:1fr}
+      .grid3,.grid2{grid-template-columns:1fr}
+      .process{grid-template-columns:1fr 1fr}
+      .contact{grid-template-columns:1fr}
+      .nav{position:relative;top:auto}
+    }
+    @media (max-width: 520px){
+      .process{grid-template-columns:1fr}
+      h1{font-size:36px}
+      .nav{padding:14px 16px}
+    }
+      h1{font-size:36px}
+      .nav{padding:14px 16px}
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div>
+        <div class="brand-title">YS Concierge</div>
+        <div class="brand-sub">Youssef Shaaban</div>
+      </div>
+    </div>
+
+    <nav class="navlinks" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="btn small secondary" href="tel:+201228204344">Call</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="top">
+      <div>
+        <span class="tag">Private Aviation & Travel Concierge • Discreet • Fast response</span>
+        <h1>Concierge services for high‑net‑worth clients — travel handled end‑to‑end.</h1>
+        <p class="lead">
+          I support clients with <strong>Business & First Class international travel</strong>, <strong>chauffeured ground transportation</strong>, and <strong>premium accommodation coordination</strong> — delivered with speed, accuracy, and discretion.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#contact">Request Concierge Support</a>
+          <a class="btn secondary" href="https://wa.me/201228204344" target="_blank" rel="noreferrer">WhatsApp</a>
+          <a class="btn secondary" href="mailto:yshaapan@gmail.com">Email</a>
+        </div>
+
+        <div class="kpis" aria-label="Key highlights">
+          <div class="kpi">
+            <strong>VIP-first</strong>
+            <div class="muted">White-glove handling and proactive updates</div>
+          </div>
+          <div class="kpi">
+            <strong>Global</strong>
+            <div class="muted">International itineraries and multi-city planning</div>
+          </div>
+          <div class="kpi">
+            <strong>Discreet</strong>
+            <div class="muted">Confidentiality and attention to detail</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card" aria-label="Quick contact">
+        <div style="display:flex;gap:14px;align-items:center;margin-bottom:14px">
+          <img src="profile.jpg" alt="Youssef Shaaban" class="portrait" />
+          <div>
+            <strong style="font-size:18px">Youssef Shaaban</strong>
+            <div class="muted" style="margin-top:4px">Private Aviation & Travel Concierge</div>
+          </div>
+        </div>
+        <h3>Direct Contact</h3>
+        <p class="muted" style="margin:0 0 14px;line-height:1.55">
+          Prefer direct coordination? Reach me anytime using the options below.
+        </p>
+        <div style="display:grid;gap:10px">
+          <span class="pill"><strong>Phone:</strong> <a href="tel:+201228204344">01228204344</a></span>
+          <span class="pill"><strong>Email:</strong> <a href="mailto:yshaapan@gmail.com">yshaapan@gmail.com</a></span>
+          <span class="pill"><strong>WhatsApp:</strong> <a href="https://wa.me/201228204344" target="_blank" rel="noreferrer">Chat on WhatsApp</a></span>
+        </div>
+        <p class="hint">
+          Availability and response times can vary by time zone. For urgent travel issues, WhatsApp is typically fastest.
+        </p>
+      </aside>
+    </section>
+
+    <section class="section" id="services">
+      <h2>Services</h2>
+      <p class="muted" style="margin:0 0 14px;line-height:1.6">
+        Concierge support tailored to busy executives and high‑net‑worth individuals.
+      </p>
+
+      <div class="grid3">
+        <div class="service">
+          <div class="title"><span class="dot"></span><strong>Business & First Class Flights</strong></div>
+          <div class="muted">International bookings, complex routings, and preferred options when available.</div>
+          <ul class="list">
+            <li>Multi‑city itinerary planning</li>
+            <li>Fare monitoring & alternative options</li>
+            <li>Travel-ready documentation checklist</li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="title"><span class="dot"></span><strong>Ground Transportation</strong></div>
+          <div class="muted">Airport transfers, chauffeur requests, and coordinated pickup/drop‑off.</div>
+          <ul class="list">
+            <li>Seamless coordination and timing</li>
+            <li>Special requests where applicable</li>
+            <li>City-to-city transport support</li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="title"><span class="dot"></span><strong>Accommodation</strong></div>
+          <div class="muted">Hotel selection support with convenience, location, and client preferences in mind.</div>
+          <ul class="list">
+            <li>Short‑stay and extended stays</li>
+            <li>Preference-based recommendations</li>
+            <li>Request handling and follow-up</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <h3 style="margin:0 0 8px">Other requests</h3>
+        <p class="muted" style="margin:0;line-height:1.6">
+          If you have a request not listed above, reach out — I can often coordinate solutions or recommend the next best step.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <h2>How it works</h2>
+      <p class="muted" style="margin:0 0 14px;line-height:1.6">A simple process designed for speed and clarity.</p>
+      <div class="process">
+        <div class="step">
+          <div class="num">1</div>
+          <strong>Request</strong>
+          <div class="muted" style="margin-top:6px;line-height:1.55">Send your details (dates, route, preferences, budget range).</div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <strong>Options</strong>
+          <div class="muted" style="margin-top:6px;line-height:1.55">I return curated options with clear breakdowns and tradeoffs.</div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <strong>Confirm</strong>
+          <div class="muted" style="margin-top:6px;line-height:1.55">You approve the selection and I proceed with booking/coordination.</div>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <strong>Support</strong>
+          <div class="muted" style="margin-top:6px;line-height:1.55">Ongoing assistance for changes and travel-day coordination.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <h2>About</h2>
+      <div class="grid2">
+        <div class="card">
+          <h3>Youssef Shaaban</h3>
+          <p class="muted" style="margin:0;line-height:1.7">
+            I provide private concierge-style travel coordination for clients who value discretion, speed, and premium outcomes.
+            My work is built around efficiency: fewer messages, clearer options, and confident execution — so your travel runs smoothly.
+          </p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+            <a class="btn secondary" href="mailto:yshaapan@gmail.com">yshaapan@gmail.com</a>
+            <a class="btn secondary" href="tel:+201228204344">01228204344</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Client experience</h3>
+          <p class="muted" style="margin:0 0 10px;line-height:1.7">
+            The goal is to keep things effortless on your side — clear communication, confirmed details, and proactive updates.
+          </p>
+          <ul class="list">
+            <li>Professional, prompt communication</li>
+            <li>Preference-driven recommendations</li>
+            <li>Attention to details (timings, connections, notes)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Testimonials">
+      <h2>Client Notes</h2>
+      <p class="muted" style="margin:0 0 14px;line-height:1.6">
+        Replace these placeholders with real client feedback when ready.
+      </p>
+      <div class="grid3">
+        <div class="testimonial">
+          <p class="quote">“Everything was handled smoothly and quickly — I didn’t have to chase details.”</p>
+          <div class="who">— Client, Executive Travel</div>
+        </div>
+        <div class="testimonial">
+          <p class="quote">“Clear options, fast turnaround, and great attention to preferences.”</p>
+          <div class="who">— Client, International Trips</div>
+        </div>
+        <div class="testimonial">
+          <p class="quote">“Reliable support when plans changed last minute.”</p>
+          <div class="who">— Client, Multi‑city Itinerary</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <p class="muted" style="margin:0 0 14px;line-height:1.6">
+        Send your request and I’ll reply as soon as possible. If it’s urgent, WhatsApp is best.
+      </p>
+
+      <div class="contact">
+        <div class="card">
+          <h3>Send a message</h3>
+          <form id="contactForm">
+            <div style="display:grid;gap:10px">
+              <div>
+                <label for="name">Your name</label>
+                <input id="name" name="name" placeholder="Name" required />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" placeholder="name@example.com" required />
+              </div>
+              <div>
+                <label for="message">What do you need help with?</label>
+                <textarea id="message" name="message" placeholder="Dates, route, class, hotel preferences, pickup details, etc." required></textarea>
+              </div>
+              <button class="btn primary" type="submit" style="cursor:pointer">Send Email</button>
+              <p class="hint">This form opens your email app (no domain needed). If you want a real web form later, I can add Formspree or another free form handler.</p>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Direct options</h3>
+          <p class="muted" style="margin:0 0 14px;line-height:1.6">Choose the fastest way to reach me:</p>
+          <div style="display:grid;gap:10px">
+            <a class="btn secondary" href="tel:+201228204344">Call: 01228204344</a>
+            <a class="btn secondary" href="mailto:yshaapan@gmail.com">Email: yshaapan@gmail.com</a>
+            <a class="btn secondary" href="https://wa.me/201228204344" target="_blank" rel="noreferrer">WhatsApp: +20 122 820 4344</a>
+          </div>
+          <div class="card" style="margin-top:12px;background:rgba(255,255,255,.02)">
+            <strong>What to include in your request</strong>
+            <ul class="list">
+              <li>Dates + departure/arrival cities</li>
+              <li>Preferred cabin (Business/First)</li>
+              <li>Traveler names exactly as passport</li>
+              <li>Hotel location preferences and requirements</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> YS Concierge — Youssef Shaaban</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="pill" href="#top">Back to top</a>
+        <a class="pill" href="mailto:yshaapan@gmail.com">Email</a>
+        <a class="pill" href="tel:+201228204344">Call</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // No backend needed: this opens the user's email client with a pre-filled message.
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const subject = encodeURIComponent('Concierge request');
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\nRequest:\n${message}\n\n— Sent from ysconcierge site`
+      );
+      window.location.href = `mailto:yshaapan@gmail.com?subject=${subject}&body=${body}`;
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
